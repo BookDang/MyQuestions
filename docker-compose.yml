@@ -1,0 +1,10 @@
+services:
+  nextjs-my-questions:
+    build:
+      context: .
+      dockerfile: .docker/nextjs/Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3003:3003"
