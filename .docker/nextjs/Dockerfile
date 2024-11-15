@@ -4,13 +4,13 @@ FROM node:22.11.0
 WORKDIR /app
 
 # Install app dependencies
-COPY package.json /app
+COPY ../nextjs/package.json /app
 
 RUN npm install
 
 # Bundle app source
-COPY . /app
+COPY ../nextjs/ /app
 
 EXPOSE 3003
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]

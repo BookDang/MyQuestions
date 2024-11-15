@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: .docker/nextjs/Dockerfile
     volumes:
-      - .:/app
+      - ./nextjs:/app
       - /app/node_modules
     ports:
       - "3003:3003"
