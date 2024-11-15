@@ -1,5 +1,6 @@
 services:
   nextjs-my-questions:
+    container_name: fe-my-questions
     build:
       context: .
       dockerfile: .docker/nextjs/Dockerfile
@@ -7,4 +8,31 @@ services:
       - ./nextjs:/app
       - /app/node_modules
     ports:
-      - "3003:3003"
+      - "3004:3004"
+    networks:
+      - my-questions-frontend
+    
+  nestjs-my-questions:
+    container_name: be-my-questions
+    build:
+      context: .
+      dockerfile: .docker/nestjs/Dockerfile
+    volumes:
+      - ./nestjs:/app
+      - /app/node_modules
+    ports:
+      - "3005:3005"
+    networks:
+      - my-questions-backend
+  
+# Add networks for frontend and backend services
+networks:
+  my-questions-frontend:
+    driver: bridge
+  my-questions-backend:
+    driver: bridge
+
+# Add volumes for MongoDB and MySQL data
+volumes:
+  mongodb-data-my-questions:
+  mysql-data-my-questions:
