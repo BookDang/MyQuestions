@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
 import { DataSource } from 'typeorm'
+import { HealthCheck, HealthCheckService, MongooseHealthIndicator } from '@nestjs/terminus';
 import { HealthService } from '@/health/health.service'
 import { CreateHealthDto } from '@/health/dto/create-health.dto'
 import { UpdateHealthDto } from '@/health/dto/update-health.dto'
@@ -9,6 +10,8 @@ export class HealthController {
   constructor(
     private readonly healthService: HealthService,
     private readonly dataSource: DataSource,
+    private readonly healthCheckService: HealthCheckService,
+    private readonly mongooseHealthIndicator: MongooseHealthIndicator,
   ) {}
 
   @Post()
@@ -27,6 +30,21 @@ export class HealthController {
         console.log('Database connection initialized successfully');
         return 'Database connection initialized successfully';
       }
+    } catch (error) {
+      console.error('Database connection failed', error)
+      return 'Database connection failed'
+    }
+  }
+
+  @Get('check-mongodb')
+  async healthCheckMongoDb() {
+    try {
+      return this.healthCheckService.check([
+        async () =>
+          this.mongooseHealthIndicator.pingCheck('mongodb', {
+            timeout: 1000, // Optional timeout for the check
+          }),
+      ]);
     } catch (error) {
       console.error('Database connection failed', error)
       return 'Database connection failed'
