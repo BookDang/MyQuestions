@@ -1,4 +1,39 @@
 services:
+  # Add MySQL service
+  mysql-my-questions:
+    container_name: mysql-my-questions
+    build: 
+      context: .
+      dockerfile: .docker/mysql/Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MySQL_USER: root
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: my_questions
+    networks:
+      - my-questions-backend
+    volumes:
+      - mysql-data-my-questions:/var/lib/mysql
+
+  # Add MongoDB service
+  mongodb-my-questions:
+    container_name: mongodb-my-questions
+    build:
+      context: .
+      dockerfile: .docker/mongodb/Dockerfile
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mysecretpassword
+      MONGO_INITDB_DATABASE: my-questions
+    networks:
+      - my-questions-backend
+    volumes:
+      - mongodb-data-my-questions:/data/db
+      - mongodb-config-my-questions:/data/configdb
+
   nextjs-my-questions:
     container_name: fe-my-questions
     build:
@@ -36,3 +71,4 @@ networks:
 volumes:
   mongodb-data-my-questions:
   mysql-data-my-questions:
+  mongodb-config-my-questions:
