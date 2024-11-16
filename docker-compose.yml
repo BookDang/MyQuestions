@@ -59,6 +59,25 @@ services:
       - "3005:3005"
     networks:
       - my-questions-backend
+
+  # Add Nginx service
+  nginx-my-questions:
+    container_name: nginx-my-questions
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - .docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - my-questions-frontend
+      - my-questions-backend
+    depends_on:
+      - nextjs-my-questions
+      - nestjs-my-questions
+      - mongodb-my-questions
+      - mysql-my-questions
   
 # Add networks for frontend and backend services
 networks:
