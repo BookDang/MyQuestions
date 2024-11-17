@@ -64,6 +64,9 @@ services:
       - "3005:3005"
     networks:
       - my-questions-backend
+    depends_on:
+      - mysql-my-questions
+      - mongodb-my-questions
 
   # Add Nginx service
   nginx-my-questions:
