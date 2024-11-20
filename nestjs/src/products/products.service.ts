@@ -48,11 +48,13 @@ export class ProductsService {
     for (let i = 0; i < 101401; i++) {
       const product = new Product()
       const name = faker.commerce.productName()
+      const category = faker.commerce.department()
       product.name = name
-      product.second_name = name
+      product.index_name = name
       product.price = parseFloat(faker.commerce.price())
       product.stock_quantity = faker.number.int({ min: 1, max: 100 })
-      product.category = faker.commerce.department()
+      product.category = category
+      product.index_category = category
       products.push(product)
     }
     await this.productRepository.save(products);
