@@ -36,6 +36,9 @@ export class OrderDetail {
   @Column()
   order_id: number
 
+  @Column()
+  not_index_order_id: number
+
   @ManyToOne(() => Order, (order) => order.orderDetails, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'order_id' })
   order: Order;
@@ -43,6 +46,9 @@ export class OrderDetail {
   @Column()
   @Index()
   product_id: number
+
+  @Column()
+  not_index_product_id: number
 
   @ManyToOne(() => Product, (product) => product.orderDetails, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'product_id' })
@@ -52,7 +58,9 @@ export class OrderDetail {
 // CREATE TABLE OrderDetails (
 //     id INT AUTO_INCREMENT PRIMARY KEY, -- Primary Key Index
 //     order_id INT NOT NULL,
+//     not_index_order_id INT UNSIGNED,
 //     product_id INT NOT NULL,
+//     not_index_product_id INT UNSIGNED,
 //     quantity INT NOT NULL,
 //     price DECIMAL(12, 2) NOT NULL,
 //     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

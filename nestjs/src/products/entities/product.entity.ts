@@ -18,6 +18,10 @@ export class Product {
   @PrimaryGeneratedColumn()
   id: number
 
+  @Column({ type: 'int', unsigned: true })
+  @Index({ unique: true })
+  not_index_id: number
+
   @Column({ length: 100 })
   name: string
 
@@ -54,6 +58,7 @@ export class Product {
 // -- Bảng Products: Quản lý sản phẩm
 // CREATE TABLE Products (
 //     id INT AUTO_INCREMENT PRIMARY KEY, -- Primary Key Index
+//     not_index_id INT UNSIGNED,
 //     name VARCHAR(100) NOT NULL,
 //     index_name VARCHAR(100) NOT NULL,
 //     category VARCHAR(50),
@@ -65,7 +70,7 @@ export class Product {
 //     deleted_at TIMESTAMP NULL DEFAULT NULL,
 //     KEY idx_category (category), -- Named Single Column Index
 //     KEY idx_index_name (index_name), -- Named Single Column Index
-//     KEY idx_price_stock (price, stock_quantity) -- Named Composite Index
+//     KEY idx_price_stock (price, stock_quantity), -- Named Composite Index
 // );
 }
 

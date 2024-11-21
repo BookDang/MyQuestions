@@ -20,7 +20,7 @@ export class ProductsService {
     @InjectRepository(Order)
     private orderRepository: Repository<Order>,
     @InjectRepository(OrderDetail)
-    private orderDetailRepository: Repository<OrderDetail>
+    private orderDetailRepository: Repository<OrderDetail>,
   ) {}
 
   create(createProductDto: CreateProductDto) {
@@ -49,6 +49,7 @@ export class ProductsService {
       const product = new Product()
       const name = faker.commerce.productName()
       const category = faker.commerce.department()
+      product.not_index_id = null
       product.name = name
       product.index_name = name
       product.price = parseFloat(faker.commerce.price())
@@ -57,7 +58,7 @@ export class ProductsService {
       product.index_category = category
       products.push(product)
     }
-    await this.productRepository.save(products);
+    await this.productRepository.save(products)
   }
 
   async insertCustomers() {
@@ -69,7 +70,7 @@ export class ProductsService {
       customer.phone_number = faker.phone.number({ style: 'national' })
       customers.push(customer)
     }
-    await this.customerRepository.save(customers);
+    await this.customerRepository.save(customers)
   }
 
   async insertOrders() {
@@ -95,7 +96,7 @@ export class ProductsService {
       //   orderDetail.order_id = i
       //   orderDetail.product_id = product.id
       //   orderDetail.quantity = product.stock_quantity === 1 ? 1 : product.stock_quantity - 1
-      //   orderDetail.price = faker.number.int({ min: 1, max: 5 }) > 3 ? product.price : (+ product.price) + (parseFloat(faker.commerce.price({ min: 1, max: 50 })))  
+      //   orderDetail.price = faker.number.int({ min: 1, max: 5 }) > 3 ? product.price : (+ product.price) + (parseFloat(faker.commerce.price({ min: 1, max: 50 })))
       //   orderDetail.created_at = date
       //   orderDetail.updated_at = date
       //   orderDetails.push(orderDetail)

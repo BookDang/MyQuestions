@@ -23,6 +23,9 @@ export class Order {
   @Column()
   customer_id: number
 
+  @Column()
+  not_index_customer_id: number
+
   @ManyToOne(() => Customer, (customer) => customer.orders, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
@@ -50,6 +53,7 @@ export class Order {
 // CREATE TABLE Orders (
 //     id INT AUTO_INCREMENT PRIMARY KEY, -- Primary Key Index
 //     customer_id INT NOT NULL,
+//     not_index_customer_id INT UNSIGNED,
 //     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 //     status ENUM('Pending', 'Completed', 'Cancelled') NOT NULL,
 //     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
