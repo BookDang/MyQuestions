@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: .docker/mysql/Dockerfile
     ports:
-      - "3306:3306"
+      - "3806:3306"
     environment:
       MySQL_USER: root
       MYSQL_ROOT_PASSWORD: mysecretpassword
@@ -28,7 +28,7 @@ services:
       context: .
       dockerfile: .docker/mongodb/Dockerfile
     ports:
-      - "27017:27017"
+      - "28017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mysecretpassword
@@ -75,7 +75,7 @@ services:
       context: .
       dockerfile: .docker/nginx/Dockerfile
     ports:
-      - "80:80"
+      - "85:80"
     volumes:
       - .docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     networks:
