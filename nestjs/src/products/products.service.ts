@@ -45,7 +45,7 @@ export class ProductsService {
 
   async insertProducts() {
     const products: Product[] = []
-    for (let i = 0; i < 101401; i++) {
+    for (let i = 0; i < 101441; i++) {
       const product = new Product()
       const name = faker.commerce.productName()
       const category = faker.commerce.department()
@@ -66,6 +66,7 @@ export class ProductsService {
     for (let i = 0; i < 10000; i++) {
       const customer = new Customer()
       customer.name = faker.person.fullName()
+      customer.index_name = customer.name
       customer.email = faker.number.int({ min: 1, max: 100 }) + faker.internet.email()
       customer.phone_number = faker.phone.number({ style: 'national' })
       customers.push(customer)
@@ -89,20 +90,20 @@ export class ProductsService {
       order.updated_at = date
       orders.push(order)
 
-      // const numberOfProducts = faker.number.int({ min: 1, max: 10 })
-      // for (let j = 1; j < numberOfProducts; j++) {
-      //   const orderDetail = new OrderDetail()
-      //   const product = products[faker.number.int({ min: 1, max: products.length - 1 })]
-      //   orderDetail.order_id = i
-      //   orderDetail.product_id = product.id
-      //   orderDetail.quantity = product.stock_quantity === 1 ? 1 : product.stock_quantity - 1
-      //   orderDetail.price = faker.number.int({ min: 1, max: 5 }) > 3 ? product.price : (+ product.price) + (parseFloat(faker.commerce.price({ min: 1, max: 50 })))
-      //   orderDetail.created_at = date
-      //   orderDetail.updated_at = date
-      //   orderDetails.push(orderDetail)
-      // }
+      const numberOfProducts = faker.number.int({ min: 1, max: 10 })
+      for (let j = 1; j < numberOfProducts; j++) {
+        const orderDetail = new OrderDetail()
+        const product = products[faker.number.int({ min: 1, max: products.length - 1 })]
+        orderDetail.order_id = i
+        orderDetail.product_id = product.id
+        orderDetail.quantity = product.stock_quantity === 1 ? 1 : product.stock_quantity - 1
+        orderDetail.price = faker.number.int({ min: 1, max: 5 }) > 3 ? product.price : (+ product.price) + (parseFloat(faker.commerce.price({ min: 1, max: 50 })))
+        orderDetail.created_at = date
+        orderDetail.updated_at = date
+        orderDetails.push(orderDetail)
+      }
     }
     await this.orderRepository.save(orders)
-    // await this.orderDetailRepository.save(orderDetails)
+    await this.orderDetailRepository.save(orderDetails)
   }
 }

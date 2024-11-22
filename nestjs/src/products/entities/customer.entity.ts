@@ -19,11 +19,14 @@ export class Customer {
   id: number
 
   @Column({ type: 'int', unsigned: true })
-  @Index({ unique: true })
   not_index_id: number
 
   @Column({ length: 100 })
   name: string
+
+  @Column({ length: 100 })
+  @Index()
+  index_name: string
 
   @Column({ length: 100 })
   email: string
@@ -49,12 +52,13 @@ export class Customer {
 //     id INT AUTO_INCREMENT PRIMARY KEY, -- Primary Key Index
 //     not_index_id INT UNSIGNED,
 //     name VARCHAR(100) NOT NULL,
+//     index_name VARCHAR(100),
 //     email VARCHAR(100) NOT NULL UNIQUE, -- Unique Index
 //     phone_number VARCHAR(15),
 //     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 //     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 //     deleted_at TIMESTAMP NULL DEFAULT NULL,
-//     INDEX (name), -- Single Column Index
-//     INDEX (phone_number), -- Single Column Index
+//     KEY idx_index_name (index_name),
+//     KEY idx_phone_number (phone_number)
 // );
 }
