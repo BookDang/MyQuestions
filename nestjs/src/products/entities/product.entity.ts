@@ -68,7 +68,7 @@ export class Product {
 //     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 //     deleted_at TIMESTAMP NULL DEFAULT NULL,
 //     KEY idx_index_category (index_category), -- Named Single Column Index
-//     KEY idx_index_name (index_index_name), -- Named Single Column Index
+//     KEY idx_index_name (index_name), -- Named Single Column Index
 //     KEY idx_price_stock (price, stock_quantity) -- Named Composite Index
 // );
 }
