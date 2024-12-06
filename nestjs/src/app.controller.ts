@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get } from '@nestjs/common'
+import { AppService } from './app.service'
+import { faker } from '@faker-js/faker'
 
 @Controller()
 export class AppController {
@@ -7,6 +8,11 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    const randomName = faker.person.fullName() // Rowan Nikolaus
+    const randomEmail = faker.internet.email()
+    console.log("randomName", randomName)
+    console.log("randomEmail", randomEmail)
+
+    return this.appService.getHello()
   }
 }
